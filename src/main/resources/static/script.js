@@ -87,11 +87,37 @@ function loadEditTime(id) {
     console.error(`Problema ao tentar acessar o time ${id}`);
     return;
   }
-/*
-  document.getElementById('aluno_nome').value = aluno.nome;
-  document.getElementById('aluno_tia').value = aluno.tia;
-  document.getElementById('edit_button').onclick = () => { updateAluno(aluno.tia)};
-*/
+
+  document.getElementById('time_nome').value = timeL.nome;
+  document.getElementById('time_anof').value = timeL.anoF;
+  document.getElementById('time_cidade').value = timeL.cidade;
+  document.getElementById('time_estado').value = timeL.estado;
+  document.getElementById('edit_button').onclick = () => { updateAluno(timeL.id)};
+
+}
+
+async function updateAluno(id) {
+  const time = getTimeById(id);
+  const nome = document.getElementById('time_nome').value;
+  const anoF = document.getElementById('time_anof').value;
+  const cidade = document.getElementById('time_cidade').value;
+  const estado = document.getElementById('time_estado').value;
+
+  const putOptions = {
+    method: 'PUT',
+    body: JSON.stringify({nome: nome, anoF: anoF, cidade: cidade, estado: estado }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
+
+  try {
+    const result = await fetch(`/api/times/${time.id}`, putOptions);
+    await showAlunos();
+  } catch(err) {
+    console.error(err);
+  }
+  
 }
 
 window.onload = showTimes;

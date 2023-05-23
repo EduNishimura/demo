@@ -30,6 +30,31 @@
           <p>
             <button onclick="createTime()">Criar</button>
           </p>  
+    </fieldset>
+    <fieldset id="editForm">
+        <legend>Editar</legend>
+        <p>
+          <label for="time_nome">Nome do time</label>
+          <input id="time_nome" type="text" />
+        </p>
+        <p>
+          <label for="time_anof">Ano de Fundação</label>
+          <input id="time_anof" type="text" />    
+        </p>
+        <p>
+          <label for="time_cidade">Cidade</label>
+          <input id="time_cidade" type="text" />    
+        </p>
+        <p>
+          <label for="time_estado">Estado</label>
+          <input id="time_estado" type="text" />    
+        </p>
+        <p>
+          <button  id="edit_button" onclick="updateAluno()" >Editar</button>
+          <button id="delete_button">Apagar</button>
+          <button id="cancel_button">Cancelar</button>
+        </p>
+      </fieldset>
   </article>
 <div id="root"></div>
 </body>
