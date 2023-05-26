@@ -5,57 +5,135 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exemplo de consumo de API</title>
+  <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
 <body>
+    <nav>
+      <ul>
+        <li>
+          <a class="active" href="/index.html">Times</a>
+        </li>
+        <li>
+          <a class="active" href="">Jogos</a>
+        </li>
+      </ul>
+    </nav>
   <article>
-    <fieldset id="createForm">
+    <div id="times-form">
+      <fieldset class="form" id="createForm">
           <legend>Criação</legend>
+            <input class="form-input" id="new_time_nome" placeholder="Nome do Time" type="text" />
+            <input class="form-input" id="new_anof" placeholder="Ano de Fundação" type="text" />    
+            <input class="form-input" id="new_cidade" placeholder="Cidade" type="text" />    
+            <input class="form-input" id="new_estado" placeholder="Estado" type="text" />    
           <p>
-            <label for="new_time_nome">Time</label>
-            <input id="new_time_nome" type="text" />
-          </p>
-          <p>
-            <label for="new_anof">Ano de fundação</label>
-            <input id="new_anof" type="text" />    
-          </p>
-          <p>
-            <label for="new_cidade">Cidade</label>
-            <input id="new_cidade" type="text" />    
-          </p>
-          <p>
-            <label for="new_estado">Estado</label>
-            <input id="new_estado" type="text" />    
-          </p>
-          <p>
-            <button onclick="createTime()">Criar</button>
+            <button id="create-time-btn" onclick="createTime()">Criar</button>
           </p>  
     </fieldset>
-    <fieldset id="editForm">
+    <!--Editar Time-->
+    <fieldset class="form" id="editForm">
         <legend>Editar</legend>
         <p>
-          <label for="time_nome">Nome do time</label>
-          <input id="time_nome" type="text" />
+          <input class="form-input" id="time_nome" placeholder="Nome do time" type="text" />
         </p>
         <p>
-          <label for="time_anof">Ano de Fundação</label>
-          <input id="time_anof" type="text" />    
+          <input class="form-input" id="time_anof" placeholder="Ano de Fundação" type="text" />    
         </p>
         <p>
-          <label for="time_cidade">Cidade</label>
-          <input id="time_cidade" type="text" />    
+          <input class="form-input" id="time_cidade" placeholder="Cidade" type="text" />    
         </p>
         <p>
-          <label for="time_estado">Estado</label>
-          <input id="time_estado" type="text" />    
+          <input class="form-input" id="time_estado" placeholder="Estado" type="text" />    
         </p>
         <p>
-          <button  id="edit_button" onclick="updateAluno()" >Editar</button>
-          <button id="delete_button">Apagar</button>
+          <button  id="edit_button" onclick="updateTime()" >Editar</button>
+          <button id="delete_button" onclick="delTime()">Apagar</button>
           <button id="cancel_button">Cancelar</button>
         </p>
       </fieldset>
+      <!--Pesquisar Time-->
+      <fieldset class="form" id="searchForm">
+        <legend>Buscar Times</legend>
+        <input type="radio" type="radio" id="s_Id" name="btn_search" value="ney" checked>
+          <label for="s_Id">Id</label>
+        <input type="radio" type="radio" id="s_Name" name="btn_search" value="mar">
+          <label for="s_Name">Nome</label>
+        <p>
+          <input class="form-input" id="s_input_id" placeholder="id" type="number" />
+          <input class="form-input" id="s_input_nome" placeholder="nome" type="text" />
+          <button class="form-input" id="search_button_id" onclick="show_id()">Pesquisar</button>
+          <button class="form-input" id="search_button_nome" onclick="show_nome()">Pesquisar</button>
+        </p>
+      </fieldset>
+    </div>
+    <div id="root"></div>
+
+      <!--============================Jogos=============================-->
+
+    <div id="jogos-form">
+      <fieldset class="form" id="createForm">
+          <legend>Criação</legend>
+          <p>
+            <label for="new_jogos_nomeA">Time A</label>
+            <input class="form-input" id="new_jogos_nomeA" type="text" />
+          </p>
+          <p>
+            <label for="new_pontosA">Pontos A</label>
+            <input class="form-input" id="new_pontosA" type="text" />    
+          </p>
+          <p>
+            <label for="new_jogos_nomeB">Time B</label>
+            <input class="form-input" id="new_jogos_nomeB" type="text" />
+          </p>
+          <p>
+            <label for="new_pontosB">Pontos B</label>
+            <input class="form-input" id="new_pontosB" type="text" />    
+          </p>
+          <p>
+            <button onclick="createJogo()">Criar</button>
+          </p>  
+      </fieldset>
+      <fieldset class="form" id="editForm">
+          <legend>Editar</legend>
+          <p>
+            <input class="form-input" placeholder="nome 1" id="edit_jogos_nomeA" type="text" />
+          </p>
+          <p>
+            <input class="form-input" placeholder="pontos time 1" id="edit_pontosA" type="number" />    
+          </p>
+          <p>
+            <input class="form-input" placeholder="nome 2" id="edit_jogos_nomeB" type="text" />
+          </p>
+          <p>
+            <input class="form-input" placeholder="pontos time 2" id="edit_pontosB" type="number" />    
+          </p>
+          <p>
+            <button  id="edit_button_jogos" onclick="updateJogo()" >Editar</button>
+            <button id="delete_button_jogos" onclick="delJogo()">Apagar</button>
+            <button id="cancel_button_jogos">Cancelar</button>
+          </p>
+        </fieldset>
+        <fieldset class="form" id="searchForm">
+          <legend>Buscar Jogo</legend>
+          <input type="radio" type="radio" id="s_j_Id" name="btn_search" value="ney" checked>
+            <label for="s_j_Id">Id</label>
+            <input type="radio" type="radio" id="s_j_Name" name="btn_search" value="mar">
+            <label for="s_j_Name">Nome</label>
+            <!--id search-->
+            <input class="form-input" id="s_jogo_id" placeholder="id" type="number" />
+            <button class="form-input" id="s_jogo_id_button" onclick="show_jogo_id()">Pesquisar id</button>
+            <!--jogo search-->
+            <input class="form-input" id="s_nomeA" placeholder="nome A" type="text" />
+            <button id="search_nomeA" onclick="show_nomeA()">Pesquisar nome a</button>
+            <input class="form-input" id="s_nomeB" placeholder="nome B" type="text" /> 
+            <button id="search_nomeB" onclick="show_nomeB()">Pesquisar nome b</button>
+
+        </fieldset>
+      </div>
+  
   </article>
-<div id="root"></div>
+  
+  <div id="root-jogos"></div>
 </body>
 </html>

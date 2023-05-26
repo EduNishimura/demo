@@ -2,7 +2,7 @@ var times = []
 
 ///////// CRUD //////////
 
-
+/*        --------===CRUD PARA TIMES===-------         */ 
 ///////// POST //////////
 async function createTime() {
   const hNome = document.getElementById('new_time_nome').value;
@@ -37,12 +37,7 @@ async function readTimes() {
   }
 }
 
-///////// FIM DO CRUD //////////
-
-
-///////// Método úteis /////////
-
-///////// Mostra alunos //////////
+///////// Mostra Times //////////
 async function showTimes() {
   await readTimes();
   const root = document.getElementById("root");
@@ -54,10 +49,10 @@ async function showTimes() {
   }
 }
 
-///////// ?adiciona cartão aluno? //////////
+///////// adiciona cartao time //////////
 function addTimeTo(element, time) {
   const newElement = `
-  <section>
+  <section class="cards">
     <h1>${time.nome}</h1>
     <div>ID: ${time.id}</div>
     <div>Ano de fundação: ${time.anoF}</div>
@@ -92,11 +87,13 @@ function loadEditTime(id) {
   document.getElementById('time_anof').value = timeL.anoF;
   document.getElementById('time_cidade').value = timeL.cidade;
   document.getElementById('time_estado').value = timeL.estado;
-  document.getElementById('edit_button').onclick = () => { updateAluno(timeL.id)};
-
+  document.getElementById('edit_button').onclick = () => { updateTime(timeL.id)};
+  document.getElementById('delete_button').onclick = () => { delTime(timeL.id)};
 }
 
-async function updateAluno(id) {
+///////////////////UPDATE////////////////////////////////
+
+async function updateTime(id) {
   const time = getTimeById(id);
   const nome = document.getElementById('time_nome').value;
   const anoF = document.getElementById('time_anof').value;
@@ -113,11 +110,273 @@ async function updateAluno(id) {
 
   try {
     const result = await fetch(`/api/times/${time.id}`, putOptions);
-    await showAlunos();
+    await showTimes();
+  } catch(err) {
+    console.error(err);
+  }
+  
+}
+/////////////////// DELETE //////////////////////
+async function delTime(id){
+  
+  const time = getTimeById(id);
+
+  try {
+    const result = await fetch(`/api/times/${time.id}`, {method: 'DELETE'});
+    await showTimes();
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+/////////////// SEARCH AREA /////////////////
+////////////// SEARCH BY ID /////////////////
+
+async function search_Time_id(){
+  const inpId = document.getElementById('s_input_id').value;
+  try {
+    const response = await fetch(`/api/times/${inpId}`);
+    times2 = await response.json();
+  } catch(err) {
+    console.error(err);
+    return [];
+  }
+}
+
+async function show_id() {
+  if(document.getElementById('s_input_id').value == ""){
+    showTimes(); 
+  }
+  await search_Time_id();
+  const root = document.getElementById("root");
+  
+  root.innerHTML = `
+  <section>
+    <h1>${times2.nome}</h1>
+    <div>ID: ${times2.id}</div>
+    <div>Ano de fundação: ${times2.anoF}</div>
+    <div>Cidade: ${times2.cidade}</div>
+    <div>Estado: ${times2.estado}</div>
+    <button onclick="loadEditTime(${times2.id})">edit</button>
+  </section>
+  `; 
+}
+////////////// SEARCH BY NOME /////////////////
+async function search_Time_nome(){
+
+  const inpNome = document.getElementById('s_input_nome').value;
+
+  try {
+    const response = await fetch(`/api/times/search?nome=${inpNome}`);
+    times = await response.json();
+  } catch(err) {
+    console.error(err);
+    return [];
+  }
+}
+
+async function show_nome() {
+
+  await search_Time_nome();
+  const root = document.getElementById("root");
+  
+  root.innerHTML = "";
+
+  for(let i=0; i<times.length; i++) {
+    addTimeTo(root, times[i])
+  }
+}
+
+window.onload = showTimes;
+
+// FIM DE TIMES //
+
+/*        --------===CRUD PARA JOGOS===-------         */
+
+var jogos = []
+
+//////// Post - jogos ////////
+async function createJogo() {
+  const cNomeA = document.getElementById('new_jogos_nomeA').value;
+  const cNomeB = document.getElementById('new_jogos_nomeB').value;
+  const cPontosA = document.getElementById('new_pontosA').value;
+  const cPontosB = document.getElementById('new_pontosB').value;
+
+  const postOptions = {
+    method: 'POST',
+    body: JSON.stringify({nomeA: cNomeA, nomeB: cNomeB, pontosA: cPontosA, pontosB: cPontosB }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
+
+  try { 
+    const response = await fetch('/api/jogos', postOptions);
+    await showJogos(); 
   } catch(err) {
     console.error(err);
   }
   
 }
 
-window.onload = showTimes;
+///////// GET - jogos//////////
+async function readJogos() {
+  try {
+    const response = await fetch('/api/jogos');
+    jogos = await response.json();
+  } catch(err) {
+    console.error(err);
+    return [];
+  }
+}
+
+///////// Mostra Jogos //////////
+async function showJogos() {
+  await readJogos();
+  const root = document.getElementById("root-jogos");
+  
+  root.innerHTML = "";
+
+  for(let i=0; i<jogos.length; i++) {
+    addJogoTo(root, jogos[i])
+  }
+}
+
+///////// adiciona cartao jogo //////////
+function addJogoTo(element, jogo) {
+  const newElement = `
+  <section class="cards">
+    <div>ID: ${jogo.id}</div>
+    <p>Time 1: ${jogo.nomeA}</p>
+    <p>Pontos: ${jogo.pontosA}</p>
+    <p>Time 2: ${jogo.nomeB}</p>
+    <p>Pontos: ${jogo.pontosB}</p>
+    <button onclick="loadEditJogo(${jogo.id})">edit</button>
+  </section>
+  `;
+
+  element.innerHTML += newElement;
+}
+
+///////// chamado pelo update //////////
+function getJogoById(id) {
+  for(let i=0; i<jogos.length; i++) {
+    if(jogos[i].id === id) return jogos[i];
+  }
+  return undefined;
+}
+
+
+function loadEditJogo(id) {
+  const jogoL = getJogoById(id);
+  
+  if(!jogoL) {
+    console.error(`Problema ao tentar acessar o jogo ${id}`);
+    return;
+  }
+
+  document.getElementById('edit_jogos_nomeA').value = jogoL.nomeA;
+  document.getElementById('edit_pontosA').value = jogoL.pontosA;
+  document.getElementById('edit_jogos_nomeB').value = jogoL.nomeB;
+  document.getElementById('edit_pontosB').value = jogoL.pontosB;
+  document.getElementById('edit_button_jogos').onclick = () => { updateJogo(jogoL.id)};
+  document.getElementById('delete_button_jogos').onclick = () => { delJogo(jogoL.id)};
+}
+
+///////////////////UPDATE - jogos//////////////////////////
+
+async function updateJogo(id) {
+  const jogo = getJogoById(id);
+  const nomeA = document.getElementById('edit_jogos_nomeA').value;
+  const pontosA = document.getElementById('edit_pontosA').value;
+  const nomeB = document.getElementById('edit_jogos_nomeB').value;
+  const pontosB = document.getElementById('edit_pontosB').value;
+
+  const putOptions = {
+    method: 'PUT',
+    body: JSON.stringify({nomeA: nomeA, pontosA: pontosA, nomeB: nomeB, pontosB: pontosB }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
+
+  try {
+    const result = await fetch(`/api/jogos/${jogo.id}`, putOptions);
+    await showJogos();
+  } catch(err) {
+    console.error(err);
+  }
+  
+}
+/////////////////// DELETE //////////////////////
+async function delJogo(id){
+  
+  const jogo = getJogoById(id);
+
+  try {
+    const result = await fetch(`/api/jogos/${jogo.id}`, {method: 'DELETE'});
+    await showJogos();
+  } catch(err) {
+    console.error(err);
+  }
+}
+
+/////////////// SEARCH AREA /////////////////
+////////////// SEARCH BY ID /////////////////
+
+async function search_jogo_id(){
+  const inpId = document.getElementById('s_jogo_id').value;
+  try {
+    const response = await fetch(`/api/jogos/${inpId}`);
+    jogos2 = await response.json();
+  } catch(err) {
+    console.error(err);
+    return [];
+  }
+}
+
+async function show_jogo_id() {
+  if(document.getElementById('s_jogo_id').value == ""){
+    showJogos(); 
+  }
+  await search_jogo_id();
+  const root = document.getElementById("root-jogos");
+  
+  root.innerHTML = `
+  <section class="cards">
+    <div>ID: ${jogos2.id}</div>
+    <p>Time 1: ${jogos2.nomeA}</p>
+    <p>Pontos: ${jogos2.pontosA}</p>
+    <p>Time 2: ${jogos2.nomeB}</p>
+    <p>Pontos: ${jogos2.pontosB}</p>
+    <button onclick="loadEditJogo(${jogos2.id})">edit</button>
+  </section>
+  `; 
+}
+
+////////////// SEARCH BY NOME /////////////////
+async function search_jogos_nome(){
+
+  const inpNome = document.getElementById('s_input_nome').value;
+
+  try {
+    const response = await fetch(`/api/times/search?nome=${inpNome}`);
+    times = await response.json();
+  } catch(err) {
+    console.error(err);
+    return [];
+  }
+}
+
+async function show_nome() {
+
+  await search_Time_nome();
+  const root = document.getElementById("root");
+  
+  root.innerHTML = "";
+
+  for(let i=0; i<times.length; i++) {
+    addTimeTo(root, times[i])
+  }
+}
+window.onload = showJogos;
