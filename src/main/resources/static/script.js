@@ -354,29 +354,60 @@ async function show_jogo_id() {
   `; 
 }
 
-////////////// SEARCH BY NOME /////////////////
-async function search_jogos_nome(){
+////////////// SEARCH JOGO BY NOME A/////////////////
+async function search_jogos_nomeA(){
 
-  const inpNome = document.getElementById('s_input_nome').value;
+  const inpNome = document.getElementById('s_nomeA').value;
 
   try {
-    const response = await fetch(`/api/times/search?nome=${inpNome}`);
-    times = await response.json();
+    const response = await fetch(`/api/jogosA/search?nomeA=${inpNome}`);
+    jogos = await response.json();
   } catch(err) {
     console.error(err);
     return [];
   }
 }
 
-async function show_nome() {
+async function show_nomeA() {
 
-  await search_Time_nome();
-  const root = document.getElementById("root");
+  await search_jogos_nomeA();
+  const root = document.getElementById("root-jogos");
   
   root.innerHTML = "";
 
-  for(let i=0; i<times.length; i++) {
-    addTimeTo(root, times[i])
+  for(let i=0; i<jogos.length; i++) {
+    addJogoTo(root, jogos[i])
   }
 }
 window.onload = showJogos;
+
+////////////// SEARCH JOGO BY NOME B/////////////////
+
+async function search_jogos_nomeB(){
+
+  const inpNome = document.getElementById('s_nomeB').value;
+
+  try {
+    const response = await fetch(`/api/jogosB/search?nomeB=${inpNome}`);
+    jogos = await response.json();
+  } catch(err) {
+    console.error(err);
+    return [];
+  }
+}
+
+async function show_nomeB() {
+
+  await search_jogos_nomeB();
+  const root = document.getElementById("root-jogos");
+  
+  root.innerHTML = "";
+
+  for(let i=0; i<jogos.length; i++) {
+    addJogoTo(root, jogos[i])
+  }
+}
+window.onload = showTimes;
+
+/////////////////////////NAV BAR BTNS////////////////////////////////
+

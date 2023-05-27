@@ -10,14 +10,20 @@
 </head>
 <body>
     <nav>
+      <div class="nav-spot">
+        <h2 id="title">Team Matches</h2>
+      </div>
       <ul>
         <li>
-          <a class="active" href="/index.html">Times</a>
+          <button class="nav-btn" onclick="show-api-times()">Times</button>
         </li>
         <li>
-          <a class="active" href="">Jogos</a>
+          <button class="nav-btn" onclick="show-api-jogos()">Jogos</button>
         </li>
       </ul>
+      <div class="nav-spot">
+        <h1 id="logo">Foto</h1>
+      </div>
     </nav>
   <article>
     <div id="times-form">
@@ -27,30 +33,20 @@
             <input class="form-input" id="new_anof" placeholder="Ano de Fundação" type="text" />    
             <input class="form-input" id="new_cidade" placeholder="Cidade" type="text" />    
             <input class="form-input" id="new_estado" placeholder="Estado" type="text" />    
-          <p>
-            <button id="create-time-btn" onclick="createTime()">Criar</button>
-          </p>  
+            <button class="form-btn" id="create-time-btn" onclick="createTime()">+ Criar</button>
     </fieldset>
     <!--Editar Time-->
     <fieldset class="form" id="editForm">
         <legend>Editar</legend>
-        <p>
           <input class="form-input" id="time_nome" placeholder="Nome do time" type="text" />
-        </p>
-        <p>
           <input class="form-input" id="time_anof" placeholder="Ano de Fundação" type="text" />    
-        </p>
-        <p>
           <input class="form-input" id="time_cidade" placeholder="Cidade" type="text" />    
-        </p>
-        <p>
           <input class="form-input" id="time_estado" placeholder="Estado" type="text" />    
-        </p>
-        <p>
-          <button  id="edit_button" onclick="updateTime()" >Editar</button>
-          <button id="delete_button" onclick="delTime()">Apagar</button>
-          <button id="cancel_button">Cancelar</button>
-        </p>
+          <div>
+            <button class="form-btn" id="edit_button" onclick="updateTime()" >Editar</button>
+            <button class="form-btn" id="delete_button" onclick="delTime()">Apagar</button>
+            <button class="form-btn" id="cancel_button">Cancelar</button>
+          </div>
       </fieldset>
       <!--Pesquisar Time-->
       <fieldset class="form" id="searchForm">
@@ -124,9 +120,9 @@
             <input class="form-input" id="s_jogo_id" placeholder="id" type="number" />
             <button class="form-input" id="s_jogo_id_button" onclick="show_jogo_id()">Pesquisar id</button>
             <!--jogo search-->
-            <input class="form-input" id="s_nomeA" placeholder="nome A" type="text" />
+            <input class="form-input" id="s_nomeA" placeholder="nome time 1" type="text" />
             <button id="search_nomeA" onclick="show_nomeA()">Pesquisar nome a</button>
-            <input class="form-input" id="s_nomeB" placeholder="nome B" type="text" /> 
+            <input class="form-input" id="s_nomeB" placeholder="nome time 2" type="text" /> 
             <button id="search_nomeB" onclick="show_nomeB()">Pesquisar nome b</button>
 
         </fieldset>

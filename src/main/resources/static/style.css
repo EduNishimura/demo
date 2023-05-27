@@ -14,7 +14,22 @@ nav{
     background-color: rgb(59, 59, 59);
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.nav-spot{
+    width: 190px;
+}
+
+#title{
+    font-size: 16px;
+}
+
+#side-nav{
+    display: flex;
+    flex-direction: row;
 }
 
 ul{
@@ -25,10 +40,24 @@ ul{
     align-items: center;
 }
 
-li a:is(:link,:active,:visited){
-    color: white;
+li{
     text-decoration: none;
-    padding: .5rem 1.5rem;
+    margin-right: 1.5vw;
+    margin-left: 1.5vw;
+}
+
+.nav-btn{
+    width: 70px;
+    height: 40px;
+    color: white;
+    font-size: 17px;
+    background-color: rgb(59, 59, 59);
+    border-radius: 5px;
+    border: none;
+}
+
+.nav-btn:hover{
+    background-color:  rgb(255, 255, 255, 0.2);
 }
 
 article{
@@ -44,7 +73,9 @@ article{
     background-color: white;
     border-radius: 10px;
     border: solid;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .form-input{
@@ -52,5 +83,12 @@ article{
   height: 30px;
   margin: 10px;
   border-radius: 10px;
+}
+
+.form-btn{
+    width: 90px;
+    height: 35px;
+    margin: 10px;
+    border-radius: 10px;
 }
 
