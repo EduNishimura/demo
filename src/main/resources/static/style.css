@@ -86,9 +86,68 @@ article{
 }
 
 .form-btn{
-    width: 90px;
-    height: 35px;
+    width: 80px;
+    height: 30px;
     margin: 10px;
     border-radius: 10px;
 }
 
+#root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+.cards{
+    width: 200px;
+    height: 250px;
+    margin: 15px;
+    background-color: rgb(115, 206, 212);
+    border-style: groove;
+    border-color: rgb(62, 62, 62);
+    border-radius: 10px;
+    border-width: thin;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#card-title{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(62, 62, 62);
+    color: white;
+    font-size: 20px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px 10px 0px 0px;
+}
+
+#card-j{
+    background-color: rgb(255, 93, 93);
+}
+
+.card-info{
+    margin: 5px;
+}
+
+#editForm{
+    display: none;
+}
+    
+#editFormJ{
+    display: none;
+}
+
+#createFormJ{
+    display: none;
+}
+    
+#searchFormJ{
+    display: none;
+}

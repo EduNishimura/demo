@@ -53,12 +53,17 @@ async function showTimes() {
 function addTimeTo(element, time) {
   const newElement = `
   <section class="cards">
-    <h1>${time.nome}</h1>
-    <div>ID: ${time.id}</div>
-    <div>Ano de fundação: ${time.anoF}</div>
-    <div>Cidade: ${time.cidade}</div>
-    <div>Estado: ${time.estado}</div>
-    <button onclick="loadEditTime(${time.id})">edit</button>
+    <div id="card-title">
+      ${time.nome}
+    </div>
+    <div>
+      <div class="card-info">Origem: </div>  
+      <div class="card-info">${time.anoF}</div>
+      <div class="card-info">${time.cidade}</div>
+      <div class="card-info">${time.estado}</div>
+      <div class="card-info">ID: ${time.id}</div>
+    </div>
+    <button class="form-btn" id="clickEdit" onclick="loadEditTime(${time.id})">edit</button>
   </section>
   `;
 
@@ -76,6 +81,8 @@ function getTimeById(id) {
 
 
 function loadEditTime(id) {
+
+  document.getElementById("editForm").style.display = "flex";
   const timeL = getTimeById(id);
   
   if(!timeL) {
@@ -151,13 +158,18 @@ async function show_id() {
   const root = document.getElementById("root");
   
   root.innerHTML = `
-  <section>
-    <h1>${times2.nome}</h1>
-    <div>ID: ${times2.id}</div>
-    <div>Ano de fundação: ${times2.anoF}</div>
-    <div>Cidade: ${times2.cidade}</div>
-    <div>Estado: ${times2.estado}</div>
-    <button onclick="loadEditTime(${times2.id})">edit</button>
+  <section class="cards">
+    <div id="card-title">
+      ${time2.nome}
+    </div>
+    <div>
+      <div class="card-info">Origem: </div>  
+      <div class="card-info">${time2.anoF}</div>
+      <div class="card-info">${time2.cidade}</div>
+      <div class="card-info">${time2.estado}</div>
+      <div class="card-info">ID: ${time2.id}</div>
+    </div>
+    <button class="form-btn" id="clickEdit" onclick="loadEditTime(${time2.id})">edit</button>
   </section>
   `; 
 }
@@ -186,8 +198,6 @@ async function show_nome() {
     addTimeTo(root, times[i])
   }
 }
-
-window.onload = showTimes;
 
 // FIM DE TIMES //
 
@@ -233,7 +243,7 @@ async function readJogos() {
 ///////// Mostra Jogos //////////
 async function showJogos() {
   await readJogos();
-  const root = document.getElementById("root-jogos");
+  const root = document.getElementById("root");
   
   root.innerHTML = "";
 
@@ -245,13 +255,16 @@ async function showJogos() {
 ///////// adiciona cartao jogo //////////
 function addJogoTo(element, jogo) {
   const newElement = `
-  <section class="cards">
+  <section class="cards" id="card-j">
+    <div>${jogo.nomeA}</div>
+    <div>${jogo.pontosA}</div>
+    <div>x</div>
+    <div>${jogo.pontosB}</div>
+    <div>${jogo.nomeB}</div>
     <div>ID: ${jogo.id}</div>
-    <p>Time 1: ${jogo.nomeA}</p>
-    <p>Pontos: ${jogo.pontosA}</p>
-    <p>Time 2: ${jogo.nomeB}</p>
-    <p>Pontos: ${jogo.pontosB}</p>
-    <button onclick="loadEditJogo(${jogo.id})">edit</button>
+    <div>
+      <button class="form-btn" id="clickEditJ" onclick="loadEditJogo(${jogo.id})">edit</button>
+    </div>
   </section>
   `;
 
@@ -268,6 +281,8 @@ function getJogoById(id) {
 
 
 function loadEditJogo(id) {
+
+  document.getElementById("editFormJ").style.display = "flex";
   const jogoL = getJogoById(id);
   
   if(!jogoL) {
@@ -340,16 +355,16 @@ async function show_jogo_id() {
     showJogos(); 
   }
   await search_jogo_id();
-  const root = document.getElementById("root-jogos");
+  const root = document.getElementById("root");
   
   root.innerHTML = `
-  <section class="cards">
-    <div>ID: ${jogos2.id}</div>
+  <section class="cards" id="card-j">
     <p>Time 1: ${jogos2.nomeA}</p>
     <p>Pontos: ${jogos2.pontosA}</p>
-    <p>Time 2: ${jogos2.nomeB}</p>
     <p>Pontos: ${jogos2.pontosB}</p>
-    <button onclick="loadEditJogo(${jogos2.id})">edit</button>
+    <p>Time 2: ${jogos2.nomeB}</p>
+    <div>ID: ${jogos2.id}</div>
+    <button id="clickEditJ" onclick="loadEditJogo(${jogos2.id})">edit</button>
   </section>
   `; 
 }
@@ -371,7 +386,7 @@ async function search_jogos_nomeA(){
 async function show_nomeA() {
 
   await search_jogos_nomeA();
-  const root = document.getElementById("root-jogos");
+  const root = document.getElementById("root");
   
   root.innerHTML = "";
 
@@ -379,7 +394,6 @@ async function show_nomeA() {
     addJogoTo(root, jogos[i])
   }
 }
-window.onload = showJogos;
 
 ////////////// SEARCH JOGO BY NOME B/////////////////
 
@@ -399,7 +413,7 @@ async function search_jogos_nomeB(){
 async function show_nomeB() {
 
   await search_jogos_nomeB();
-  const root = document.getElementById("root-jogos");
+  const root = document.getElementById("root");
   
   root.innerHTML = "";
 
@@ -407,7 +421,54 @@ async function show_nomeB() {
     addJogoTo(root, jogos[i])
   }
 }
-window.onload = showTimes;
+
 
 /////////////////////////NAV BAR BTNS////////////////////////////////
 
+async function start() {
+  alert("Bem vindo ao Team Matches, aqui você pode conferir dados de jogos dos seus times favoritos, assim como informações deles!!!!");
+  alert("Caso queira, você tambem pode adicionar novos dados, editar e excluir dados de jogos e times");
+  showTimes();
+  
+  }
+  
+  async function showDisplay() {
+  
+    document.getElementById("createFormJ").style.display = "none";
+    document.getElementById("createForm").style.display = "flex";
+  
+    document.getElementById("searchFormJ").style.display = "none";
+    document.getElementById("searchForm").style.display = "flex"; 
+
+    document.getElementById("editForm").style.display = "none";
+    document.getElementById("editFormJ").style.display = "none";
+  
+    showTimes(); 
+  
+  }
+  
+  async function showDisplayJ() {
+  
+    document.getElementById("createForm").style.display = "none";
+    document.getElementById("createFormJ").style.display = "flex";
+  
+    document.getElementById("searchForm").style.display = "none";
+    document.getElementById("searchFormJ").style.display = "flex"; 
+
+    document.getElementById("editForm").style.display = "none";
+    document.getElementById("editFormJ").style.display = "none";
+  
+    showJogos();
+  }
+  
+  async function CancelT() {
+    document.getElementById("editForm").style.display = "none";
+  
+  }
+  
+  async function CancelJ() {
+   document.getElementById("editFormJ").style.display = "none";
+  
+  }
+
+  window.onload = start();

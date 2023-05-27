@@ -11,14 +11,14 @@
 <body>
     <nav>
       <div class="nav-spot">
-        <h2 id="title">Team Matches</h2>
+        <h1 id="title">Team Matches</h1>
       </div>
       <ul>
         <li>
-          <button class="nav-btn" onclick="show-api-times()">Times</button>
+          <button class="nav-btn" onclick="showDisplay()">Times</button>
         </li>
         <li>
-          <button class="nav-btn" onclick="show-api-jogos()">Jogos</button>
+          <button class="nav-btn" onclick="showDisplayJ()">Jogos</button>
         </li>
       </ul>
       <div class="nav-spot">
@@ -45,7 +45,7 @@
           <div>
             <button class="form-btn" id="edit_button" onclick="updateTime()" >Editar</button>
             <button class="form-btn" id="delete_button" onclick="delTime()">Apagar</button>
-            <button class="form-btn" id="cancel_button">Cancelar</button>
+            <button class="form-btn" id="cancel_button" onclick="CancelT()">Cancelar</button>
           </div>
       </fieldset>
       <!--Pesquisar Time-->
@@ -58,17 +58,16 @@
         <p>
           <input class="form-input" id="s_input_id" placeholder="id" type="number" />
           <input class="form-input" id="s_input_nome" placeholder="nome" type="text" />
-          <button class="form-input" id="search_button_id" onclick="show_id()">Pesquisar</button>
-          <button class="form-input" id="search_button_nome" onclick="show_nome()">Pesquisar</button>
+          <button class="form-btn" id="search_button_id" onclick="show_id()">Pesquisar</button>
+          <button class="form-btn" id="search_button_nome" onclick="show_nome()">Pesquisar</button>
         </p>
       </fieldset>
     </div>
-    <div id="root"></div>
 
       <!--============================Jogos=============================-->
 
     <div id="jogos-form">
-      <fieldset class="form" id="createForm">
+      <fieldset class="form" id="createFormJ">
           <legend>Criação</legend>
           <p>
             <label for="new_jogos_nomeA">Time A</label>
@@ -90,7 +89,7 @@
             <button onclick="createJogo()">Criar</button>
           </p>  
       </fieldset>
-      <fieldset class="form" id="editForm">
+      <fieldset class="form" id="editFormJ">
           <legend>Editar</legend>
           <p>
             <input class="form-input" placeholder="nome 1" id="edit_jogos_nomeA" type="text" />
@@ -107,10 +106,10 @@
           <p>
             <button  id="edit_button_jogos" onclick="updateJogo()" >Editar</button>
             <button id="delete_button_jogos" onclick="delJogo()">Apagar</button>
-            <button id="cancel_button_jogos">Cancelar</button>
+            <button id="cancel_button_jogos" onclick="CancelJ()">Cancelar</button>
           </p>
         </fieldset>
-        <fieldset class="form" id="searchForm">
+        <fieldset class="form" id="searchFormJ">
           <legend>Buscar Jogo</legend>
           <input type="radio" type="radio" id="s_j_Id" name="btn_search" value="ney" checked>
             <label for="s_j_Id">Id</label>
@@ -130,6 +129,6 @@
   
   </article>
   
-  <div id="root-jogos"></div>
+  <div id="root"></div>
 </body>
 </html>
