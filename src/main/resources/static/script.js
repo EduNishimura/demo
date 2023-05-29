@@ -1,5 +1,5 @@
 var times = []
-
+var times2 = []
 ///////// CRUD //////////
 
 /*        --------===CRUD PARA TIMES===-------         */ 
@@ -141,35 +141,38 @@ async function delTime(id){
 
 async function search_Time_id(){
   const inpId = document.getElementById('s_input_id').value;
-  try {
-    const response = await fetch(`/api/times/${inpId}`);
-    times2 = await response.json();
-  } catch(err) {
-    console.error(err);
-    return [];
-  }
-}
-
-async function show_id() {
   if(document.getElementById('s_input_id').value == ""){
     showTimes(); 
+  } else{
+    try {
+      const response = await fetch(`/api/times/${inpId}`);
+      times2 = await response.json();
+    } catch(err) {
+      console.error(err);
+      return [];
+    }
   }
+
+}
+
+
+async function show_id() {
   await search_Time_id();
   const root = document.getElementById("root");
   
   root.innerHTML = `
   <section class="cards">
     <div id="card-title">
-      ${time2.nome}
+      ${times2.nome}
     </div>
     <div>
       <div class="card-info">Origem: </div>  
-      <div class="card-info">${time2.anoF}</div>
-      <div class="card-info">${time2.cidade}</div>
-      <div class="card-info">${time2.estado}</div>
-      <div class="card-info">ID: ${time2.id}</div>
+      <div class="card-info">${times2.anoF}</div>
+      <div class="card-info">${times2.cidade}</div>
+      <div class="card-info">${times2.estado}</div>
+      <div class="card-info">ID: ${times2.id}</div>
     </div>
-    <button class="form-btn" id="clickEdit" onclick="loadEditTime(${time2.id})">edit</button>
+    <button class="form-btn" id="clickEdit" onclick="loadEditTime(${times2.id})">edit</button>
   </section>
   `; 
 }
@@ -204,6 +207,7 @@ async function show_nome() {
 /*        --------===CRUD PARA JOGOS===-------         */
 
 var jogos = []
+var jogos2 = []
 
 //////// Post - jogos ////////
 async function createJogo() {
@@ -341,19 +345,21 @@ async function delJogo(id){
 
 async function search_jogo_id(){
   const inpId = document.getElementById('s_jogo_id').value;
-  try {
-    const response = await fetch(`/api/jogos/${inpId}`);
-    jogos2 = await response.json();
-  } catch(err) {
-    console.error(err);
-    return [];
+  if(document.getElementById('s_jogo_id').value == ""){
+    showJogos(); 
+  }else{
+    try {
+      const response = await fetch(`/api/jogos/${inpId}`);
+      jogos2 = await response.json();
+    } catch(err) {
+      console.error(err);
+      return [];
+    }
   }
+
 }
 
 async function show_jogo_id() {
-  if(document.getElementById('s_jogo_id').value == ""){
-    showJogos(); 
-  }
   await search_jogo_id();
   const root = document.getElementById("root");
   
@@ -461,6 +467,8 @@ async function start() {
     showJogos();
   }
   
+//////////////// CANCEL DISPLAY ///////////////////
+
   async function CancelT() {
     document.getElementById("editForm").style.display = "none";
   
@@ -472,3 +480,58 @@ async function start() {
   }
 
   window.onload = start();
+
+////////////////////////BUSCAR RADIO BUTTON DISPLAY///////////////////////////
+//TIMES:
+async function radioIdT() {
+  var checkBox = document.getElementById("s_Id");
+  if(checkBox.checked == true){
+    document.getElementById("s_input_id").style.display = "flex";
+    document.getElementById("search_button_id").style.display = "flex";
+    document.getElementById("s_input_nome").style.display = "none";
+    document.getElementById("search_button_nome").style.display = "none"; 
+  }
+
+
+}
+
+async function radioNomeT() {
+  var checkBox = document.getElementById("s_Name");
+
+
+  if(checkBox.checked == true){
+    document.getElementById("s_input_id").style.display = "none";
+    document.getElementById("search_button_id").style.display = "none";
+    document.getElementById("s_input_nome").style.display = "flex";
+    document.getElementById("search_button_nome").style.display = "flex";
+  }
+}
+
+//JOGOS:
+async function radioIdJ() {
+  var checkBox = document.getElementById("s_j_Id");
+  if(checkBox.checked == true){
+    document.getElementById("s_jogo_id").style.display = "flex";
+    document.getElementById("s_jogo_id_button").style.display = "flex";
+    document.getElementById("s_nomeA").style.display = "none";
+    document.getElementById("search_nomeA").style.display = "none";
+    document.getElementById("s_nomeB").style.display = "none";
+    document.getElementById("search_nomeB").style.display = "none";
+  }
+
+
+}
+
+async function radioNomeJ() {
+  var checkBox = document.getElementById("s_j_Name");
+
+
+  if(checkBox.checked == true){
+    document.getElementById("s_jogo_id").style.display = "none";
+    document.getElementById("s_jogo_id_button").style.display = "none";
+    document.getElementById("s_nomeA").style.display = "flex";
+    document.getElementById("search_nomeA").style.display = "flex";
+    document.getElementById("s_nomeB").style.display = "flex";
+    document.getElementById("search_nomeB").style.display = "flex";
+  }
+}

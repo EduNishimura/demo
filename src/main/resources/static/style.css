@@ -19,12 +19,18 @@ nav{
     color: white;
 }
 
+#img-logo{
+    width: 70px;
+    aspect-ratio: 1/1;
+    border-radius: 40px;
+}
+
 .nav-spot{
     width: 190px;
 }
 
 #title{
-    font-size: 16px;
+    font-size: 24px;
 }
 
 #side-nav{
@@ -129,7 +135,7 @@ article{
 }
 
 #card-j{
-    background-color: rgb(255, 93, 93);
+    background-color: rgb(116, 211, 105);
 }
 
 .card-info{
@@ -149,5 +155,29 @@ article{
 }
     
 #searchFormJ{
+    display: none;
+}
+
+#s_input_nome{
+    display: none;
+}
+
+#search_button_nome{
+    display: none;
+}
+
+#s_nomeA{
+    display: none;
+}
+
+#search_nomeA{
+    display: none;
+}
+
+#s_nomeB{
+    display: none;
+}
+
+#search_nomeB{
     display: none;
 }

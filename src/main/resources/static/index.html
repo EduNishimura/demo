@@ -22,7 +22,7 @@
         </li>
       </ul>
       <div class="nav-spot">
-        <h1 id="logo">Foto</h1>
+        <img src="futebol.jpg" id="img-logo" alt="">
       </div>
     </nav>
   <article>
@@ -51,14 +51,14 @@
       <!--Pesquisar Time-->
       <fieldset class="form" id="searchForm">
         <legend>Buscar Times</legend>
-        <input type="radio" type="radio" id="s_Id" name="btn_search" value="ney" checked>
+        <input type="radio" type="radio" id="s_Id" name="btn_search" onclick="radioIdT()" checked>
           <label for="s_Id">Id</label>
-        <input type="radio" type="radio" id="s_Name" name="btn_search" value="mar">
+        <input type="radio" type="radio" id="s_Name" name="btn_search" onclick="radioNomeT()">
           <label for="s_Name">Nome</label>
         <p>
           <input class="form-input" id="s_input_id" placeholder="id" type="number" />
-          <input class="form-input" id="s_input_nome" placeholder="nome" type="text" />
           <button class="form-btn" id="search_button_id" onclick="show_id()">Pesquisar</button>
+          <input class="form-input" id="s_input_nome" placeholder="nome" type="text" />
           <button class="form-btn" id="search_button_nome" onclick="show_nome()">Pesquisar</button>
         </p>
       </fieldset>
@@ -111,9 +111,9 @@
         </fieldset>
         <fieldset class="form" id="searchFormJ">
           <legend>Buscar Jogo</legend>
-          <input type="radio" type="radio" id="s_j_Id" name="btn_search" value="ney" checked>
+          <input type="radio" type="radio" id="s_j_Id" name="btn_search" onclick="radioIdJ()">
             <label for="s_j_Id">Id</label>
-            <input type="radio" type="radio" id="s_j_Name" name="btn_search" value="mar">
+            <input type="radio" type="radio" id="s_j_Name" name="btn_search" onclick="radioNomeJ()">
             <label for="s_j_Name">Nome</label>
             <!--id search-->
             <input class="form-input" id="s_jogo_id" placeholder="id" type="number" />
