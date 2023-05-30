@@ -118,6 +118,8 @@ async function updateTime(id) {
   try {
     const result = await fetch(`/api/times/${time.id}`, putOptions);
     await showTimes();
+    CancelT();
+    window.alert("Edição Submetida!");
   } catch(err) {
     console.error(err);
   }
@@ -131,6 +133,8 @@ async function delTime(id){
   try {
     const result = await fetch(`/api/times/${time.id}`, {method: 'DELETE'});
     await showTimes();
+    CancelT();
+    window.alert("Time deletado!");
   } catch(err) {
     console.error(err);
   }
@@ -324,6 +328,8 @@ async function updateJogo(id) {
   try {
     const result = await fetch(`/api/jogos/${jogo.id}`, putOptions);
     await showJogos();
+    CancelJ();
+    window.alert("Edição Submetida!");
   } catch(err) {
     console.error(err);
   }
@@ -337,6 +343,8 @@ async function delJogo(id){
   try {
     const result = await fetch(`/api/jogos/${jogo.id}`, {method: 'DELETE'});
     await showJogos();
+    CancelJ();
+    window.alert("Jogo Deletado!");
   } catch(err) {
     console.error(err);
   }
