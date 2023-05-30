@@ -6,6 +6,7 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 nav{
@@ -26,11 +27,12 @@ nav{
 }
 
 .nav-spot{
-    width: 190px;
+    width: 205px;
 }
 
 #title{
     font-size: 24px;
+    margin-left: 5px;
 }
 
 #side-nav{
@@ -245,14 +247,14 @@ article{
     background-color: rgb(235, 145, 145);
 }
 
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 470px) {
     #img-spot{
         display: none;
     }
   }
 
 @media only screen and (max-width: 300px) {
-    #title{font-size: 13px;}
+    #title{font-size: 15px;}
 
     .nav-spot{
         width: 100px;
