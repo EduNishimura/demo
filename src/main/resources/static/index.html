@@ -8,20 +8,20 @@
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
-<body>
+<body onload="select(0)">
     <nav>
       <div class="nav-spot">
-        <h1 id="title">Team Matches</h1>
+        <h1 id="title">Team Matches™</h1>
       </div>
       <ul>
         <li>
-          <button class="nav-btn" onclick="showDisplay()">Times</button>
+          <button class="nav-btn" id="btn-nav-time" onclick="showDisplay(); select(0)">Times</button>
         </li>
         <li>
-          <button class="nav-btn" onclick="showDisplayJ()">Jogos</button>
+          <button class="nav-btn" id="btn-nav-jogo" onclick="showDisplayJ(); select(1)">Jogos</button>
         </li>
       </ul>
-      <div class="nav-spot">
+      <div class="nav-spot" id="img-spot">
         <img src="futebol.jpg" id="img-logo" alt="">
       </div>
     </nav>
@@ -51,16 +51,16 @@
       <!--Pesquisar Time-->
       <fieldset class="form" id="searchForm">
         <legend>Buscar Times</legend>
-        <input type="radio" type="radio" id="s_Id" name="btn_search" onclick="radioIdT()" checked>
-          <label for="s_Id">Id</label>
-        <input type="radio" type="radio" id="s_Name" name="btn_search" onclick="radioNomeT()">
-          <label for="s_Name">Nome</label>
-        <p>
-          <input class="form-input" id="s_input_id" placeholder="id" type="number" />
-          <button class="form-btn" id="search_button_id" onclick="show_id()">Pesquisar</button>
-          <input class="form-input" id="s_input_nome" placeholder="nome" type="text" />
-          <button class="form-btn" id="search_button_nome" onclick="show_nome()">Pesquisar</button>
-        </p>
+        <div class="radio-box">
+          <input type="radio" type="radio" id="s_Id" name="btn_search" onclick="radioIdT()" checked>
+            <label for="s_Id">Id</label>
+          <input type="radio" type="radio" id="s_Name" name="btn_search" onclick="radioNomeT()">
+            <label for="s_Name">Nome</label>
+        </div>
+        <input class="form-input" id="s_input_id" placeholder="id" type="number" />
+        <button class="form-btn" id="search_button_id" onclick="show_id()">Pesquisar</button>
+        <input class="form-input" id="s_input_nome" placeholder="nome" type="text" />
+        <button class="form-btn" id="search_button_nome" onclick="show_nome()">Pesquisar</button>
       </fieldset>
     </div>
 
@@ -69,60 +69,40 @@
     <div id="jogos-form">
       <fieldset class="form" id="createFormJ">
           <legend>Criação</legend>
-          <p>
-            <label for="new_jogos_nomeA">Time A</label>
-            <input class="form-input" id="new_jogos_nomeA" type="text" />
-          </p>
-          <p>
-            <label for="new_pontosA">Pontos A</label>
-            <input class="form-input" id="new_pontosA" type="text" />    
-          </p>
-          <p>
-            <label for="new_jogos_nomeB">Time B</label>
-            <input class="form-input" id="new_jogos_nomeB" type="text" />
-          </p>
-          <p>
-            <label for="new_pontosB">Pontos B</label>
-            <input class="form-input" id="new_pontosB" type="text" />    
-          </p>
-          <p>
-            <button onclick="createJogo()">Criar</button>
-          </p>  
+            <input class="form-input" id="new_jogos_nomeA" placeholder="Time A" type="text" />
+            <input class="form-input" id="new_pontosA" placeholder="pontos A" type="text" />         
+            <input class="form-input" id="new_jogos_nomeB" placeholder="Time B" type="text" />
+            <input class="form-input" id="new_pontosB" placeholder="pontos B" type="text" />         
+            <button class="form-btn" onclick="createJogo()">Criar</button>
       </fieldset>
       <fieldset class="form" id="editFormJ">
           <legend>Editar</legend>
-          <p>
             <input class="form-input" placeholder="nome 1" id="edit_jogos_nomeA" type="text" />
-          </p>
-          <p>
             <input class="form-input" placeholder="pontos time 1" id="edit_pontosA" type="number" />    
-          </p>
-          <p>
             <input class="form-input" placeholder="nome 2" id="edit_jogos_nomeB" type="text" />
-          </p>
-          <p>
-            <input class="form-input" placeholder="pontos time 2" id="edit_pontosB" type="number" />    
-          </p>
-          <p>
-            <button  id="edit_button_jogos" onclick="updateJogo()" >Editar</button>
-            <button id="delete_button_jogos" onclick="delJogo()">Apagar</button>
-            <button id="cancel_button_jogos" onclick="CancelJ()">Cancelar</button>
-          </p>
+            <input class="form-input" placeholder="pontos time 2" id="edit_pontosB" type="number" />
+            <div>
+              <button class="form-btn" id="edit_button_jogos" onclick="updateJogo()" >Editar</button>
+              <button class="form-btn" id="delete_button_jogos" onclick="delJogo()">Apagar</button>
+              <button class="form-btn" id="cancel_button_jogos" onclick="CancelJ()">Cancelar</button>
+            </div>    
         </fieldset>
         <fieldset class="form" id="searchFormJ">
           <legend>Buscar Jogo</legend>
-          <input type="radio" type="radio" id="s_j_Id" name="btn_search" onclick="radioIdJ()">
+          <div class="radio-box">
+            <input type="radio" type="radio" id="s_j_Id" name="btn_search" onclick="radioIdJ()" checked>
             <label for="s_j_Id">Id</label>
             <input type="radio" type="radio" id="s_j_Name" name="btn_search" onclick="radioNomeJ()">
             <label for="s_j_Name">Nome</label>
+          </div>
             <!--id search-->
             <input class="form-input" id="s_jogo_id" placeholder="id" type="number" />
-            <button class="form-input" id="s_jogo_id_button" onclick="show_jogo_id()">Pesquisar id</button>
+            <button class="form-btn" id="s_jogo_id_button" onclick="show_jogo_id()">Pesquisar</button>
             <!--jogo search-->
             <input class="form-input" id="s_nomeA" placeholder="nome time 1" type="text" />
-            <button id="search_nomeA" onclick="show_nomeA()">Pesquisar nome a</button>
+            <button class="form-btn" id="search_nomeA" onclick="show_nomeA()">Pesquisar</button>
             <input class="form-input" id="s_nomeB" placeholder="nome time 2" type="text" /> 
-            <button id="search_nomeB" onclick="show_nomeB()">Pesquisar nome b</button>
+            <button class="form-btn" id="search_nomeB" onclick="show_nomeB()">Pesquisar</button>
 
         </fieldset>
       </div>

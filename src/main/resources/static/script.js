@@ -260,11 +260,13 @@ async function showJogos() {
 function addJogoTo(element, jogo) {
   const newElement = `
   <section class="cards" id="card-j">
-    <div>${jogo.nomeA}</div>
-    <div>${jogo.pontosA}</div>
-    <div>x</div>
-    <div>${jogo.pontosB}</div>
-    <div>${jogo.nomeB}</div>
+    <div class="time-space" id="color-time-1">${jogo.nomeA}</div>
+    <div class="points">
+      <div>${jogo.pontosA}</div>
+      <div>x</div>
+      <div>${jogo.pontosB}</div>
+    </div>
+    <div class="time-space" id="color-time-2">${jogo.nomeB}</div>
     <div>ID: ${jogo.id}</div>
     <div>
       <button class="form-btn" id="clickEditJ" onclick="loadEditJogo(${jogo.id})">edit</button>
@@ -365,12 +367,17 @@ async function show_jogo_id() {
   
   root.innerHTML = `
   <section class="cards" id="card-j">
-    <p>Time 1: ${jogos2.nomeA}</p>
-    <p>Pontos: ${jogos2.pontosA}</p>
-    <p>Pontos: ${jogos2.pontosB}</p>
-    <p>Time 2: ${jogos2.nomeB}</p>
+    <div class="time-space" id="color-time-1">${jogos2.nomeA}</div>
+    <div class="points">
+      <div>${jogos2.pontosA}</div>
+      <div>x</div>
+      <div>${jogos2.pontosB}</div>
+    </div>
+    <div class="time-space" id="color-time-2">${jogos2.nomeB}</div>
     <div>ID: ${jogos2.id}</div>
-    <button id="clickEditJ" onclick="loadEditJogo(${jogos2.id})">edit</button>
+    <div>
+      <button class="form-btn" id="clickEditJ" onclick="loadEditJogo(${jogos2.id})">edit</button>
+    </div>
   </section>
   `; 
 }
@@ -533,5 +540,18 @@ async function radioNomeJ() {
     document.getElementById("search_nomeA").style.display = "flex";
     document.getElementById("s_nomeB").style.display = "flex";
     document.getElementById("search_nomeB").style.display = "flex";
+  }
+}
+
+///////////////////nav pressed/////////////////////
+
+function select(num) {
+  if (num == 0){
+      document.getElementById("btn-nav-time").style.backgroundColor = 'rgb(255, 255, 255, 0.2)';
+      document.getElementById("btn-nav-jogo").style.backgroundColor = '';
+    }
+  if (num == 1){
+      document.getElementById("btn-nav-time").style.backgroundColor = '';
+      document.getElementById("btn-nav-jogo").style.backgroundColor = 'rgb(255, 255, 255, 0.2)';
   }
 }

@@ -60,6 +60,8 @@ li{
     background-color: rgb(59, 59, 59);
     border-radius: 5px;
     border: none;
+    cursor: pointer;
+    transition-duration: 0.4s;
 }
 
 .nav-btn:hover{
@@ -92,10 +94,21 @@ article{
 }
 
 .form-btn{
-    width: 80px;
-    height: 30px;
-    margin: 10px;
-    border-radius: 10px;
+    margin: 10px 10px 0px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(234, 234, 234);
+    width: 70px;
+    height: 35px;
+    border-style: thin;
+    border-radius: 12px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+.form-btn:hover{
+    background-color: rgb(198, 198, 198);
 }
 
 #root {
@@ -110,7 +123,7 @@ article{
     width: 200px;
     height: 250px;
     margin: 15px;
-    background-color: rgb(115, 206, 212);
+    background-color: lightblue;
     border-style: groove;
     border-color: rgb(62, 62, 62);
     border-radius: 10px;
@@ -135,7 +148,9 @@ article{
 }
 
 #card-j{
-    background-color: rgb(116, 211, 105);
+    background-color: rgb(233, 233, 233);
+    padding: 12px;
+    border-width: medium;
 }
 
 .card-info{
@@ -180,4 +195,85 @@ article{
 
 #search_nomeB{
     display: none;
+}
+
+#edit_button_jogos{
+    margin: 10px 10px 0px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(196, 196, 196);
+    width: 70px;
+    height: 35px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+#edit_button_jogos:hover{
+    background-color: rgb(228, 228, 228);
+}
+
+.radio-box{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#clickEdit{
+    margin-bottom: 8px;
+}
+
+.time-space{
+    width: auto;
+    padding: 5px 8px 5px 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-style: solid;
+    border-width: thin;
+}
+
+#color-time-1{
+    background-color: rgb(154, 239, 239);
+}
+
+#color-time-2{
+    background-color: rgb(235, 145, 145);
+}
+
+@media only screen and (max-width: 420px) {
+    #img-spot{
+        display: none;
+    }
+  }
+
+@media only screen and (max-width: 300px) {
+    #title{font-size: 13px;}
+
+    .nav-spot{
+        width: 100px;
+    }
+    
+    ul{
+        width: 130px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    li{
+        text-decoration: none;
+        margin-right: 0%;
+        margin-left: 0%;
+    }
+    
+    .nav-btn{
+        width: 50px;
+        height: 30px;
+        font-size: 15px;
+    }
 }
